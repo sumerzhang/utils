@@ -134,7 +134,12 @@ export function verity(no: string): boolean {
    * @returns - 转换后的数
    */
   function toNumber(x: string): number {
-    return Number(x);
+    const parsed = Number(x);
+    // If `parsed` is `NaN`, then `x` is not a number
+    if (isNaN(parsed)) {
+      throw new Error('Not a number');
+    }
+    return parsed;
   }
 
   /**
@@ -146,6 +151,10 @@ export function verity(no: string): boolean {
    * @returns - 乘积
    */
   function multiply([a, b]: [a: number, b: number]): number {
-    return a * b;
+    if (typeof a === 'number' && typeof b === 'number') {
+      return a * b;
+    } else {
+      throw new Error('Invalid input');
+    }
   }
 }
